@@ -1,16 +1,21 @@
-# flutter_calismalari
+# Flutter Learning Repository
 
-A new Flutter project.
+This repository contains my Flutter learning journey.
 
-## Getting Started
+## 📚 What I Practice
 
-This project is a starting point for a Flutter application.
+- StatefulWidget usage
+- Layout widgets (Row, Column, Container)
+- PopupMenuButton
+- DropdownButton
+- Basic state management
+- UI experiments
 
-A few resources to get you started if this is your first Flutter project:
+## 🎯 Purpose
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The goal of this repository is to improve my Flutter skills by building small examples and experimenting with different widgets.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠 Tech Stack
+
+- Flutter
+- Dart
