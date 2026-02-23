@@ -1,113 +1,164 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-void main(List<String>args){
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+void main(List<String> args) {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget{
- const MyApp({super.key});
- final url='https://img.icons8.com/color/512/flutter.png';
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
- Widget buildItem(String value,String label){
-  return Expanded(
-                          child:Column(
-                            children: [
-                              Text('1.5K',style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                                ),
-                                ),
-                                Text('Takipçi')
-                            ],
-                    
-                        ),
-                    );
-
- }
-
- @override
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('Profil Sayfası'),
-        ),
-        body: Center(
-          child: Container(
-            width: 500,
-            color: const Color.fromARGB(255, 227, 217, 216),
-            child: Column(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(url
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text("Musa Acıbalık",
-                style:TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold
-                  
-                ) ,
-                
-                ),
-                Text("full stack developer",
-                style:TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                  
-                ) ,
-           ),
-           SizedBox(height: 24,
-           ),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        buildItem('1.5K', 'takipçi'),
-                        buildItem('1.2k', 'takip'),
-                        buildItem('35', 'Proje'),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8,),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Hakkımda',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+    return MaterialApp(theme: ThemeData(), home: ColorPickerPage());
+  }
+}
 
-                        ),
-                        
-                        ),
-                        SizedBox(height: 8,),
-                        Text('flutter öğrenerek mobil uygulama yapıyorum.python ve flutter ile hem backend hem de frontend çalışmaları yapıyroum'),
-                      ],
-                    ),
+class ColorPickerPage extends StatefulWidget {
+  const ColorPickerPage({super.key});
+
+  @override
+  State<ColorPickerPage> createState() => _ColorPickerPageState();
+}
+
+class _ColorPickerPageState extends State<ColorPickerPage> {
+  bool isCircular = false;
+  Color selectedColor = Colors.blue;
+  bool isShowColorName = false;
+  final Map<Color, String> renkler = {
+    Colors.red: 'kırmızı',
+    Colors.blue: 'mavi',
+    Colors.green: 'yeşil',
+    Colors.yellow: 'sarı',
+    Colors.purple: 'mor',
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Renk Seçici'),
+        centerTitle: true,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              setState(() {
+                isShowColorName = !isShowColorName;
+              });
+            },
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  value: 'a',
+                  child: Row(children: [Text('renk adını göster / gizle')]),
+                ),
+              ];
+            },
+            icon: Icon(Icons.more_vert),
+          ),
+        ],
+      ),
+
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: selectedColor,
+                borderRadius: BorderRadius.circular(isCircular ? 100 : 10),
+                boxShadow: [
+                  BoxShadow(
+                    color: selectedColor.withOpacity(0.5),
+                    blurRadius: 15,
+                    spreadRadius: 10,
                   ),
-                )
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            isShowColorName
+                ? Text(renkler[selectedColor] ?? 'seçilen renk')
+                : SizedBox(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                DropdownButton<Color>(
+                  value: selectedColor,
+                  items:
+                      renkler.entries.map((entry) {
+                        return DropdownMenuItem(
+                          value: entry.key,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                color: entry.key,
+                              ),
+                              SizedBox(height: 4),
+                              Text(entry.value),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedColor = value!;
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: _rastgeleRenkSec,
+                  child: Text('Rastgele'),
+                ),
+                IconButton(
+                  onPressed: _renginKodunuGoster,
+                  icon: Icon(Icons.info),
+                ),
+                IconButton(
+                  onPressed: () {
+                    _containerSekliniDegistir();
+                  },
+                  icon: Icon(Icons.circle_outlined),
+                ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 
+  void _rastgeleRenkSec() {
+    final colors = renkler.keys.toList();
+    final rastgeleSayi = Random().nextInt(colors.length);
+    final randomColor = colors[rastgeleSayi];
+    setState(() {
+      selectedColor = randomColor;
+      debugPrint(rastgeleSayi.toString());
+    });
+  }
+
+  void _renginKodunuGoster() {
+    Fluttertoast.showToast(
+      msg:
+          "RGB :(${selectedColor.red},${selectedColor.green},${selectedColor.blue},)",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.blue,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
+  void _containerSekliniDegistir() {
+    setState(() {
+      isCircular = !isCircular;
+    });
+  }
 }
