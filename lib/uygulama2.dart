@@ -19,7 +19,7 @@
 //                                 ),
 //                                 Text('Takipçi')
 //                             ],
-                    
+
 //                         ),
 //                     );
 
@@ -54,16 +54,16 @@
 //                   color: Colors.black,
 //                   fontSize: 24,
 //                   fontWeight: FontWeight.bold
-                  
+
 //                 ) ,
-                
+
 //                 ),
 //                 Text("full stack developer",
 //                 style:TextStyle(
 //                   color: Colors.black,
 //                   fontSize: 16,
 //                   fontWeight: FontWeight.bold
-                  
+
 //                 ) ,
 //            ),
 //            SizedBox(height: 24,
@@ -84,7 +84,7 @@
 //                 Card(
 //                   child: Padding(
 //                     padding: const EdgeInsets.all(16.0),
-                    
+
 //                     child: Column(
 //                       crossAxisAlignment: CrossAxisAlignment.start,
 //                       children: [
@@ -94,7 +94,7 @@
 //                           fontSize: 18,
 
 //                         ),
-                        
+
 //                         ),
 //                         SizedBox(height: 8,),
 //                         Text('flutter öğrenerek mobil uygulama yapıyorum.python ve flutter ile hem backend hem de frontend çalışmaları yapıyroum'),

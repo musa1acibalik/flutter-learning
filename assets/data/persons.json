@@ -1,0 +1,46 @@
+{
+    "persons": [
+        {
+            "id": 1,
+            "isim": "emre",
+            "erkekMi": true,
+            "sevdigiRenkler": [
+                "mavi",
+                "kırmızı"
+            ],
+            "adress": [
+                {
+                    "il": "ankara",
+                    "ilçe": "çankaya",
+                    "tur": "ev"
+                },
+                {
+                    "il": "bursa",
+                    "ilçe": "yıldırım",
+                    "tur": "iş"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "isim": "ayşe",
+            "erkekMi": false,
+            "sevdigiRenkler": [
+                "siyah",
+                "turuncu"
+            ],
+            "adress": [
+                {
+                    "il": "van",
+                    "ilçe": "aaa",
+                    "tur": "ev"
+                },
+                {
+                    "il": "yozgat",
+                    "ilçe": "bbb",
+                    "tur": "iş"
+                }
+            ]
+        }
+    ]
+}

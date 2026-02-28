@@ -111,9 +111,9 @@
 //           width:100,
 //           alignment: Alignment.center,
 //           height: 100,
-          
+
 //           color: Colors.deepOrange,
-        
+
 //           child: const Text('merhaba dunya'),
 //         ),
 //       );
