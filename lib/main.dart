@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_calismalari/dio_kullanimi.dart';
+import 'package:flutter_calismalari/text_field_kullanimi.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void main(List<String> args) {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData(), home: ColorPickerPage());
+    return MaterialApp(theme: ThemeData(), home: TextFieldKullanimi());
   }
 }
 
